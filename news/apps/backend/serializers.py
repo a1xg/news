@@ -1,11 +1,12 @@
 from rest_framework import serializers
+from rest_framework.fields import SerializerMethodField
 from . import models
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserSerializer (serializers.ModelSerializer):
     class Meta:
         model = models.User
-        fields = ( "id", "username", "password", )
+        fields = ("id", "username", "password",)
         write_only_fields = ('password',)
         read_only_fields = ('id',)
 
@@ -17,29 +18,42 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
-class CommentSerializer(serializers.ModelSerializer):
+class CommentSerializer (serializers.ModelSerializer):
+    author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = models.Comment
         fields = '__all__'
 
-# TODO добавить comments count
+
 class NewsListSerializer(serializers.ModelSerializer):
     # TODO не выводить все комменты, а только их количество
-    comments = CommentSerializer(many=True, read_only=True)
+    total_comments = SerializerMethodField()
     class Meta:
         model = models.News
         fields = (
+            'id',
             'creation_date',
             'author_name',
             'title',
             'link',
-            'votes',
-            'comments',
+            'total_comments',
         )
 
+    def get_total_comments(self, instance):
+        return instance.comments.count()
 
-class NewsDetailSerializer(serializers.ModelSerializer):
+
+class NewsDetailSerializer (serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
+    author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = models.News
-        fields = '__all__'
+        fields = (
+            'id',
+            'creation_date',
+            'author_name',
+            'title',
+            'link',
+            'comments'
+        )
+
