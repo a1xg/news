@@ -20,3 +20,6 @@ class NewsListView(generics.ListAPIView):
 class NewsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.NewsDetailSerializer
     queryset = News.objects.all()
+
+class CommentCreateView(generics.CreateAPIView):
+    serializer_class = serializers.CommentSerializer

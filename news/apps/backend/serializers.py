@@ -1,17 +1,6 @@
 from rest_framework import serializers
 from . import models
 
-class NewsListSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.News
-        fields = '__all__'
-
-
-class NewsDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.News
-        fields = '__all__'
-
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,3 +16,30 @@ class UserSerializer(serializers.ModelSerializer):
         )
         return user
 
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Comment
+        fields = '__all__'
+
+# TODO добавить comments count
+class NewsListSerializer(serializers.ModelSerializer):
+    # TODO не выводить все комменты, а только их количество
+    comments = CommentSerializer(many=True, read_only=True)
+    class Meta:
+        model = models.News
+        fields = (
+            'creation_date',
+            'author_name',
+            'title',
+            'link',
+            'votes',
+            'comments',
+        )
+
+
+class NewsDetailSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True, read_only=True)
+    class Meta:
+        model = models.News
+        fields = '__all__'

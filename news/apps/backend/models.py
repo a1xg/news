@@ -13,9 +13,16 @@ class News(models.Model):
     )
     title = models.CharField(max_length=200, blank=False)
     link = models.CharField(max_length=400, blank=False)
-    amount_of_up_votes = models.IntegerField(default=0)
+    votes = models.IntegerField(default=0)
+
 
 class Comment(models.Model):
+    news = models.ForeignKey(
+        'News',
+        on_delete=models.CASCADE,
+        blank=False,
+        related_name='comments'
+    )
     creation_date = models.DateTimeField(auto_now_add=True)
     author_name = models.ForeignKey(
         User,
@@ -26,8 +33,4 @@ class Comment(models.Model):
     content = models.TextField(
         blank=False
     )
-    news = models.ForeignKey(
-        'News',
-        on_delete=models.CASCADE,
-        blank=False,
-    )
+
