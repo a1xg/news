@@ -1,8 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
-
-User = get_user_model()
-
+from django.contrib.auth.models import User
 
 class News (models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
@@ -34,3 +31,14 @@ class Comment (models.Model):
         blank=False
     )
 
+class VoteNews(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    news = models.ForeignKey(
+        News,
+        on_delete=models.CASCADE,
+        related_name='votes'
+    )
+    total_votes = models.IntegerField(default=0)
+
+    class Meta:
+        unique_together = ['user', 'news']
