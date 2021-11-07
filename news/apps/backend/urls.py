@@ -7,5 +7,6 @@ urlpatterns = [
     path('news/detail/<int:pk>/comment/create', views.CommentCreateView.as_view()),
     path('news/list', views.NewsListView.as_view()),
     path('user/create', views.CreateUserView.as_view()),
+    path('news/detail/<int:pk>/vote/add', views.VoteNewsCreate.as_view())
 
 ]

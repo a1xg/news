@@ -31,8 +31,8 @@ class Comment (models.Model):
         blank=False
     )
 
-class VoteNews(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+class VoteNews (models.Model):
+    author_name = models.ForeignKey(User, on_delete=models.CASCADE)
     news = models.ForeignKey(
         News,
         on_delete=models.CASCADE,
@@ -41,4 +41,4 @@ class VoteNews(models.Model):
     total_votes = models.IntegerField(default=0)
 
     class Meta:
-        unique_together = ['user', 'news']
+        unique_together = ('author_name', 'news')

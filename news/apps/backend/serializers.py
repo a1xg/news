@@ -20,21 +20,23 @@ class UserSerializer (serializers.ModelSerializer):
 
 class CommentSerializer (serializers.ModelSerializer):
     author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = models.Comment
         fields = '__all__'
 
 
 class VoteNewsSerializer (serializers.ModelSerializer):
+
     class Meta:
         model = models.VoteNews
         fields = '__all__'
 
 
-class NewsListSerializer(serializers.ModelSerializer):
-    # TODO не выводить все комменты, а только их количество
-    votes = VoteNewsSerializer(many=True, read_only=True)
+class NewsListSerializer (serializers.ModelSerializer):
+    total_votes = SerializerMethodField()
     total_comments = SerializerMethodField()
+
     class Meta:
         model = models.News
         fields = (
@@ -44,17 +46,21 @@ class NewsListSerializer(serializers.ModelSerializer):
             'title',
             'link',
             'total_comments',
-            'votes'
+            'total_votes'
         )
 
     def get_total_comments(self, instance):
         return instance.comments.count()
+
+    def get_total_votes(self, instance):
+        return instance.votes.count()
 
 
 class NewsDetailSerializer (serializers.ModelSerializer):
     comments = CommentSerializer(many=True, read_only=True)
     author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
     votes = VoteNewsSerializer(many=True, read_only=True)
+
     class Meta:
         model = models.News
         fields = (
@@ -67,3 +73,12 @@ class NewsDetailSerializer (serializers.ModelSerializer):
             'votes'
         )
 
+class VoteNewsSerializer (serializers.ModelSerializer):
+    author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = models.VoteNews
+        fields = (
+            'author_name',
+            'news'
+        )

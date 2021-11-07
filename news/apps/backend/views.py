@@ -4,7 +4,7 @@ from . import serializers
 from .models import News
 from .permissions import IsOwnerOrReadOnly
 
-# TODO Сделать систему голосования за пост, ограничить возможность голосования 1 голосом на пользователя.
+# TODO
 #  сделать невозможным голосование пользователя за собственный пост
 #  сделать систему сброса счетчика каждые сутки
 #  - сообщения должны иметь CRUD API для управления комментариями к ним.
@@ -35,3 +35,6 @@ class NewsDetailView (generics.RetrieveUpdateDestroyAPIView):
 class CommentCreateView(generics.CreateAPIView):
     serializer_class = serializers.CommentSerializer
     permission_classes = (IsOwnerOrReadOnly, )
+
+class VoteNewsCreate(generics.CreateAPIView):
+    serializer_class = serializers.VoteNewsSerializer
