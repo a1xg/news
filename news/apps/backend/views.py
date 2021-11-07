@@ -27,7 +27,7 @@ class NewsDetailView (generics.RetrieveUpdateDestroyAPIView):
 
 
 class NewsListView (generics.ListAPIView):
-    serializer_class = serializers.NewsListSerializer
+    serializer_class = serializers.NewsSerializer
     queryset = News.objects.annotate(
         count=Count('votes')
     ).order_by('-count')
@@ -38,11 +38,11 @@ class CommentCreateView(generics.CreateAPIView):
     permission_classes = (IsOwnerOrReadOnly, )
 
 
-class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
-    serializer_class = serializers.CommentDetailSerializer
+class CommentView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = serializers.CommentSerializer
     permission_classes = (IsPostOrCommentOwner, )
     queryset = Comment.objects.all()
 
 
 class VoteNewsAdd(generics.CreateAPIView):
-    serializer_class = serializers.VoteNewsSerializer
+    serializer_class = serializers.VoteAddSerializer

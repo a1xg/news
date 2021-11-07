@@ -56,3 +56,6 @@ class VoteNews (models.Model):
 
     class Meta:
         unique_together = ('author_name', 'news')
+
+    def __str__(self):
+        return str(self.author_name)

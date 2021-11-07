@@ -18,17 +18,7 @@ class UserSerializer (serializers.ModelSerializer):
         return user
 
 
-class CommentCreateSerializer (serializers.ModelSerializer):
-    author_name = serializers.HiddenField(
-        default=serializers.CurrentUserDefault()
-    )
-
-    class Meta:
-        model = models.Comment
-        fields = '__all__'
-
-
-class CommentDetailSerializer (serializers.ModelSerializer):
+class CommentSerializer (serializers.ModelSerializer):
     author_name = serializers.CharField(
         source="author_name.username",
         read_only=True
@@ -39,7 +29,13 @@ class CommentDetailSerializer (serializers.ModelSerializer):
         fields = '__all__'
 
 
-class VoteNewsSerializer (serializers.ModelSerializer):
+class CommentCreateSerializer (CommentSerializer):
+    author_name = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
+
+class VoteAddSerializer (serializers.ModelSerializer):
     author_name = serializers.HiddenField(
         default=serializers.CurrentUserDefault()
     )
@@ -49,10 +45,20 @@ class VoteNewsSerializer (serializers.ModelSerializer):
         fields = '__all__'
 
 
-class NewsListSerializer (serializers.ModelSerializer):
-    total_votes = SerializerMethodField()
-    votes = VoteNewsSerializer(many=True, read_only=True)
-    total_comments = SerializerMethodField()
+class NewsCreateSerializer (serializers.ModelSerializer):
+    author_name = serializers.HiddenField(
+        default=serializers.CurrentUserDefault()
+    )
+
+    class Meta:
+        model = models.News
+        fields = '__all__'
+
+
+class NewsSerializer (serializers.ModelSerializer):
+    total_votes = SerializerMethodField('get_total_votes')
+    total_comments = SerializerMethodField('get_total_comments')
+    voters = SerializerMethodField('get_voters_list')
     author_name = serializers.CharField(
         source="author_name.username",
         read_only=True
@@ -66,31 +72,12 @@ class NewsListSerializer (serializers.ModelSerializer):
         return instance.comments.count()
 
     def get_total_votes(self, instance):
-
         return instance.votes.count()
 
+    def get_voters_list(self, instance):
+        return [voter.author_name.username for voter in instance.votes.all()]
 
-class NewsCreateSerializer (serializers.ModelSerializer):
-    author_name = serializers.HiddenField(
-        default=serializers.CurrentUserDefault()
-    )
 
-    class Meta:
-        model = models.News
-        fields = '__all__'
+class NewsDetailSerializer (NewsSerializer):
+    comments = CommentSerializer(many=True, read_only=True)
 
-# TODO сделать настраиваемое поле с разрешением голосовать за новость текущему пользователю(проверять голосовал ли он или нет)
-class NewsDetailSerializer (serializers.ModelSerializer):
-    comments = CommentDetailSerializer(many=True, read_only=True)
-    total_votes = SerializerMethodField()
-    author_name = serializers.CharField(
-        source="author_name.username",
-        read_only=True
-    )
-
-    class Meta:
-        model = models.News
-        fields = '__all__'
-
-    def get_total_votes(self, instance):
-        return instance.votes.count()
