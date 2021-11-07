@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# TODO прикрутить __str__ метод для User
 
 class News (models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)

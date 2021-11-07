@@ -5,7 +5,6 @@ from .models import News, Comment
 from .permissions import IsOwnerOrReadOnly
 
 # TODO
-#  сделать невозможным голосование пользователя за собственный пост
 #  сделать систему сброса счетчика каждые сутки
 #  - сообщения должны иметь CRUD API для управления комментариями к ним.
 

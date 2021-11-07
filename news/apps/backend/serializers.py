@@ -25,7 +25,10 @@ class CommentCreateSerializer (serializers.ModelSerializer):
         model = models.Comment
         fields = '__all__'
 
+
 class CommentDetailSerializer (serializers.ModelSerializer):
+    author_name = serializers.CharField(source="author_name.username", read_only=True)
+
     class Meta:
         model = models.Comment
         fields = '__all__'
@@ -34,18 +37,11 @@ class CommentDetailSerializer (serializers.ModelSerializer):
 class NewsListSerializer (serializers.ModelSerializer):
     total_votes = SerializerMethodField()
     total_comments = SerializerMethodField()
+    author_name = serializers.CharField(source="author_name.username", read_only=True)
 
     class Meta:
         model = models.News
-        fields = (
-            'id',
-            'creation_date',
-            'author_name',
-            'title',
-            'link',
-            'total_comments',
-            'total_votes'
-        )
+        fields = '__all__'
 
     def get_total_comments(self, instance):
         return instance.comments.count()
@@ -75,18 +71,10 @@ class NewsCreateSerializer (serializers.ModelSerializer):
 class NewsDetailSerializer (serializers.ModelSerializer):
     comments = CommentDetailSerializer(many=True, read_only=True)
     total_votes = SerializerMethodField()
-
+    author_name = serializers.CharField(source="author_name.username", read_only=True)
     class Meta:
         model = models.News
-        fields = (
-            'id',
-            'creation_date',
-            'author_name',
-            'title',
-            'link',
-            'comments',
-            'total_votes'
-        )
+        fields = '__all__'
 
     def get_total_votes(self, instance):
         return instance.votes.count()
