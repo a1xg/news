@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User
 from django.db.models import Count
-from rest_framework import generics
+from rest_framework import generics, permissions
+
 from . import serializers
 from .models import News, Comment
 from .permissions import *
 
 # TODO
 #  сделать систему сброса счетчика каждые сутки
+#  разобраться с методами RetrieveUpdateDestroyAPIView и реализовать UPDATE DELETE на react
 
 class CreateUserView(generics.CreateAPIView):
     model = User
@@ -35,7 +37,8 @@ class NewsListView (generics.ListAPIView):
 
 class CommentCreateView(generics.CreateAPIView):
     serializer_class = serializers.CommentCreateSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (permissions.IsAuthenticated,)
+
 
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
@@ -46,3 +49,4 @@ class CommentView(generics.RetrieveUpdateDestroyAPIView):
 
 class VoteNewsAdd(generics.CreateAPIView):
     serializer_class = serializers.VoteAddSerializer
+    permission_classes = (permissions.IsAuthenticated,)
