@@ -1,13 +1,12 @@
 from django.contrib.auth.models import User
-from rest_framework import generics, permissions
+from django.db.models import Count
+from rest_framework import generics
 from . import serializers
 from .models import News, Comment
 from .permissions import *
 
 # TODO
 #  сделать систему сброса счетчика каждые сутки
-#  - сообщения должны иметь CRUD API для управления комментариями к ним.
-#  отсортировать элементы в NewsListView
 
 class CreateUserView(generics.CreateAPIView):
     model = User
@@ -29,19 +28,21 @@ class NewsDetailView (generics.RetrieveUpdateDestroyAPIView):
 
 class NewsListView (generics.ListAPIView):
     serializer_class = serializers.NewsListSerializer
-    queryset = News.objects.all()
+    queryset = News.objects.annotate(
+        count=Count('votes')
+    ).order_by('-count')
 
 
 class CommentCreateView(generics.CreateAPIView):
     serializer_class = serializers.CommentCreateSerializer
-    permission_classes = (IsOwnerOrReadOnly, IsPostOrCommentOwner)
+    permission_classes = (IsOwnerOrReadOnly, )
 
-# TODO сделать разрешение для управления комментом владельцем поста
+
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.CommentDetailSerializer
-    permission_classes = (IsPostOrCommentOwner,)
+    permission_classes = (IsPostOrCommentOwner, )
     queryset = Comment.objects.all()
 
 
-class VoteNewsCreate(generics.CreateAPIView):
+class VoteNewsAdd(generics.CreateAPIView):
     serializer_class = serializers.VoteNewsSerializer

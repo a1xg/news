@@ -3,15 +3,23 @@ from django.contrib.auth.models import User
 
 
 class News (models.Model):
-    creation_date = models.DateTimeField(auto_now_add=True)
+    creation_date = models.DateTimeField(
+        auto_now_add=True
+    )
     author_name = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         blank=False,
         null=True
     )
-    title = models.CharField(max_length=300, blank=False)
-    link = models.CharField(max_length=300, blank=False)
+    title = models.CharField(
+        max_length=300,
+        blank=False
+    )
+    link = models.CharField(
+        max_length=300,
+        blank=False
+    )
 
 
 class Comment (models.Model):
@@ -21,7 +29,9 @@ class Comment (models.Model):
         blank=False,
         related_name='comments'
     )
-    creation_date = models.DateTimeField(auto_now_add=True)
+    creation_date = models.DateTimeField(
+        auto_now_add=True
+    )
     author_name = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
@@ -34,7 +44,10 @@ class Comment (models.Model):
 
 
 class VoteNews (models.Model):
-    author_name = models.ForeignKey(User, on_delete=models.CASCADE)
+    author_name = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
     news = models.ForeignKey(
         News,
         on_delete=models.CASCADE,

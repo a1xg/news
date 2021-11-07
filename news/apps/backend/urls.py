@@ -8,6 +8,6 @@ urlpatterns = [
     path('news/detail/<int:pk>/comment/create', views.CommentCreateView.as_view()),
     path('comment/detail/<int:pk>', views.CommentDetailView.as_view()),
     path('news/list', views.NewsListView.as_view()),
-    path('news/detail/<int:pk>/vote/add', views.VoteNewsCreate.as_view())
+    path('news/detail/<int:pk>/vote/add', views.VoteNewsAdd.as_view())
 
 ]
