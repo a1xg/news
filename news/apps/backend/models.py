@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# TODO прикрутить __str__ метод для User
+
 class News (models.Model):
     creation_date = models.DateTimeField(auto_now_add=True)
     author_name = models.ForeignKey(
@@ -31,6 +33,7 @@ class Comment (models.Model):
         blank=False
     )
 
+
 class VoteNews (models.Model):
     author_name = models.ForeignKey(User, on_delete=models.CASCADE)
     news = models.ForeignKey(
@@ -38,7 +41,6 @@ class VoteNews (models.Model):
         on_delete=models.CASCADE,
         related_name='votes'
     )
-    total_votes = models.IntegerField(default=0)
 
     class Meta:
         unique_together = ('author_name', 'news')

@@ -18,18 +18,16 @@ class UserSerializer (serializers.ModelSerializer):
         return user
 
 
-class CommentSerializer (serializers.ModelSerializer):
+class CommentCreateSerializer (serializers.ModelSerializer):
     author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = models.Comment
         fields = '__all__'
 
-
-class VoteNewsSerializer (serializers.ModelSerializer):
-
+class CommentDetailSerializer (serializers.ModelSerializer):
     class Meta:
-        model = models.VoteNews
+        model = models.Comment
         fields = '__all__'
 
 
@@ -56,10 +54,27 @@ class NewsListSerializer (serializers.ModelSerializer):
         return instance.votes.count()
 
 
-class NewsDetailSerializer (serializers.ModelSerializer):
-    comments = CommentSerializer(many=True, read_only=True)
+class VoteNewsSerializer (serializers.ModelSerializer):
     author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    votes = VoteNewsSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.VoteNews
+        fields = (
+            'author_name',
+            'news',
+        )
+
+
+class NewsCreateSerializer (serializers.ModelSerializer):
+    author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
+    class Meta:
+        model = models.News
+        fields = '__all__'
+
+
+class NewsDetailSerializer (serializers.ModelSerializer):
+    comments = CommentDetailSerializer(many=True, read_only=True)
+    total_votes = SerializerMethodField()
 
     class Meta:
         model = models.News
@@ -70,15 +85,8 @@ class NewsDetailSerializer (serializers.ModelSerializer):
             'title',
             'link',
             'comments',
-            'votes'
+            'total_votes'
         )
 
-class VoteNewsSerializer (serializers.ModelSerializer):
-    author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
-
-    class Meta:
-        model = models.VoteNews
-        fields = (
-            'author_name',
-            'news'
-        )
+    def get_total_votes(self, instance):
+        return instance.votes.count()
