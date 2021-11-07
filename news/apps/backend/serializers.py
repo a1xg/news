@@ -63,6 +63,7 @@ class VoteNewsSerializer (serializers.ModelSerializer):
 
 class NewsCreateSerializer (serializers.ModelSerializer):
     author_name = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
     class Meta:
         model = models.News
         fields = '__all__'
@@ -72,6 +73,7 @@ class NewsDetailSerializer (serializers.ModelSerializer):
     comments = CommentDetailSerializer(many=True, read_only=True)
     total_votes = SerializerMethodField()
     author_name = serializers.CharField(source="author_name.username", read_only=True)
+
     class Meta:
         model = models.News
         fields = '__all__'
