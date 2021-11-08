@@ -1,17 +1,18 @@
 import React from 'react';
+import { Route } from "react-router-dom";
 import './App.css';
+import NewsList from './components/News/NewsList/NewsList.jsx';
+import NewsDetail from './components/News/NewsDetail/NewsDetail.jsx';
 
-function App() {
-  const arr = ['fh4','2s52','3fh52','345','vfff','rff','5c3','v535']
+const App = (props) => {
+  console.log('app')
   return (
+    
     <div className="app">
-      {arr.map(item => {
-        return (
-          <p key={item}>{item}</p>
-        )
-      })}
-        
+      <Route exact path='/' component={NewsList} />
+      <Route path='/detail/:postID' component={NewsDetail} />
     </div>
+    
   );
 }
 
