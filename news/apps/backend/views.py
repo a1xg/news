@@ -20,7 +20,7 @@ class CreateUserView(generics.CreateAPIView):
 
 class NewsCreateView(generics.CreateAPIView):
     serializer_class = serializers.NewsCreateSerializer
-
+    permission_classes = (permissions.IsAuthenticated,)
 
 class NewsDetailView (generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.NewsDetailSerializer
