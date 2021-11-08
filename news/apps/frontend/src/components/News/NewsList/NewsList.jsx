@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
 import NewsPost from './NewsPost/NewsPost.jsx';
 
 const NewsList = (props) => {
@@ -20,20 +19,18 @@ const NewsList = (props) => {
             .then(response => { return response.json(); })
             .then((data) => {
                 setPosts(data);
-                console.log(data)
+                console.log("FETCH", data)
             })
-    }, []);
+    }, [props]);
 
     return (
         <div>
-            <NavLink to='/detail'>
-                TO DETAIL
-            </NavLink>
+            <p>News list:</p>
             <div>
-                {posts.map((post) => {
+                {posts.map((post, index) => {
                     return (
                         <div key={post.id}>
-                            <NewsPost post={post}/>
+                            <NewsPost post={post} position={index} />
                         </div>
                     )
                 })}

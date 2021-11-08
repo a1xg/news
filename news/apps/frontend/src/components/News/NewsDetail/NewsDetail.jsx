@@ -11,6 +11,9 @@ const NewsDetail = (props) => {
         total_comments: null,
         voters: [''],
         author_name: '',
+        creation_date: '',
+        title: '',
+        link: '',
         comments: [
             {
                 id: null,
@@ -20,9 +23,6 @@ const NewsDetail = (props) => {
                 news: null
             },
         ],
-        creation_date: '',
-        title: '',
-        link: ''
     })
 
     useEffect(() => {
@@ -37,16 +37,27 @@ const NewsDetail = (props) => {
 
     return (
         <div>
-            DETAIL
             <Link to='/'>
-                TO LIST
+                To news list
             </Link>
+            <p>News:</p>
+            <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 5 }}>
+                id {post.id} 
+                <a href={post.link}>
+                    {post.title}
+                </a>
+                <p>Creation date: {post.creation_date} by {post.author_name} | {post.total_comments} comments</p>
+                <p>{post.total_votes} votes from [{post.voters.join(', ')}]</p>
+            </div>
+            <div>
+                <p>Comments:</p>
+                {post.comments.map((comment) => {
+                    return (
+                        <Comment comment={comment} />
+                    )
+                })}
+            </div>
 
-            {post.comments.map((comment) => {
-                return (
-                    <Comment comment={comment} />
-                )
-            })}
         </div>
     )
 };
