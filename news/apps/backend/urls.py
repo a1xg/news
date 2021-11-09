@@ -1,8 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path('user/create', views.CreateUserView.as_view()),
+    path('auth/', include('rest_auth.urls')),
+    path('auth/register/', include('rest_auth.registration.urls')),
+    #path('user/create', views.CreateUserView.as_view()),
     path('news/create', views.NewsCreateView.as_view()),
     path('news/detail/<int:pk>', views.NewsDetailView.as_view()),
     path('news/detail/<int:pk>/comment/create', views.CommentCreateView.as_view()),

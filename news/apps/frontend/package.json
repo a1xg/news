@@ -11,6 +11,8 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "babel-loader": "^8.2.3",
+    "jquery": "^3.6.0",
+    "jQuery": "^1.7.4",
     "npm-watch": "^0.11.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
