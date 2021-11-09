@@ -1,5 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+
+class CustomUser (AbstractUser):
+    pass
 
 
 class News (models.Model):
@@ -7,7 +10,7 @@ class News (models.Model):
         auto_now_add=True
     )
     author_name = models.ForeignKey(
-        User,
+        CustomUser,
         on_delete=models.SET_NULL,
         blank=False,
         null=True
@@ -33,7 +36,7 @@ class Comment (models.Model):
         auto_now_add=True
     )
     author_name = models.ForeignKey(
-        User,
+        CustomUser,
         on_delete=models.SET_NULL,
         blank=False,
         null=True
@@ -45,7 +48,7 @@ class Comment (models.Model):
 
 class VoteNews (models.Model):
     author_name = models.ForeignKey(
-        User,
+        CustomUser,
         on_delete=models.CASCADE
     )
     news = models.ForeignKey(

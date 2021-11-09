@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from . import models
 from django.db.models import Count
 from rest_framework import generics, permissions
 from . import pagination
@@ -11,7 +11,7 @@ from .permissions import *
 #  разобраться с методами RetrieveUpdateDestroyAPIView и реализовать UPDATE DELETE на react
 
 class CreateUserView(generics.CreateAPIView):
-    model = User
+    model = models.CustomUser
     permission_classes = [
         permissions.AllowAny
     ]
