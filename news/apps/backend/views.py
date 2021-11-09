@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.db.models import Count
 from rest_framework import generics, permissions
-
+from . import pagination
 from . import serializers
 from .models import News, Comment
 from .permissions import *
@@ -30,6 +30,7 @@ class NewsDetailView (generics.RetrieveUpdateDestroyAPIView):
 
 class NewsListView (generics.ListAPIView):
     serializer_class = serializers.NewsSerializer
+    #pagination_class = pagination.SmallPagesPagination
     queryset = News.objects.annotate(
         count=Count('votes')
     ).order_by('-count')
@@ -38,7 +39,6 @@ class NewsListView (generics.ListAPIView):
 class CommentCreateView(generics.CreateAPIView):
     serializer_class = serializers.CommentCreateSerializer
     permission_classes = (permissions.IsAuthenticated,)
-
 
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
