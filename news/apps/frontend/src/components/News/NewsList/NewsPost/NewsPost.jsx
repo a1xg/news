@@ -1,11 +1,18 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import VoteButton from "../../VoteButton/VoteButton.jsx";
 
 const NewsPost = (props) => {
     const post = props.post
     return (
-        <div style={{width:500, height:160, backgroundColor: 'lightcoral', margin:5, padding:5}}>
-            <p>Position: {props.position} </p>
+        <div style={{width:500, height:250, backgroundColor: 'lightcoral', margin:5, padding:15}}>
+            <p>Position: {props.position}</p>
+            {' '}
+            <VoteButton postID={props.post.id} />
+            <p>
+            <a href=''> edit </a>|
+            <a href=''> delete</a> 
+            </p>
             <a href={post.link}>
             {post.title}
             </a>

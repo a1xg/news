@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NewsPost from './NewsPost/NewsPost.jsx';
+import AddNewsForm from "../AddNewsForm/AddNewsForm.jsx";
 
 const NewsList = (props) => {
     const [posts, setPosts] = useState([{
@@ -13,6 +14,7 @@ const NewsList = (props) => {
         total_votes: null,
         voters: ['']
     }])
+    console.log('local storage',localStorage)
 
     useEffect(() => {
         fetch('/api/v1/news/list')
@@ -25,6 +27,7 @@ const NewsList = (props) => {
 
     return (
         <div>
+            <AddNewsForm />
             <p>News list:</p>
             <div>
                 {posts.map((post, index) => {

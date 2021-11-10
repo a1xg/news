@@ -8,13 +8,13 @@ const Logout = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') == null) {
-      window.location.replace('/login/');
+      history.push('/login/')
     } else {
       setLoading(false);
     }
   }, []);
 
-  const handleLogout = e => {
+  const handleLogout = (e) => {
     e.preventDefault();
 
     fetch('/api/v1/auth/logout/', {

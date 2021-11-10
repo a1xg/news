@@ -41,22 +41,31 @@ const NewsDetail = (props) => {
                 To news list
             </Link>
             <p>News:</p>
-            <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 5 }}>
-                id {post.id} 
-                <a href={post.link}>
-                    {post.title}
-                </a>
+            <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
+                <a href=''>edit </a> |
+                <a href=''> delete</a>
+                <p>
+                    <a href={post.link}>
+                        {post.title}
+                    </a>
+                </p>
                 <p>Creation date: {post.creation_date} by {post.author_name} | {post.total_comments} comments</p>
                 <p>{post.total_votes} votes from [{post.voters.join(', ')}]</p>
             </div>
-            <div>
-                <p>Comments:</p>
-                {post.comments.map((comment) => {
-                    return (
-                        <Comment comment={comment} />
-                    )
-                })}
+            <div style={{ widows: 500, height: 100 }}>
+                <AddCommentForm postID={post.id} />
             </div>
+            {post.comments.length > 0 &&
+                <div>
+                    <p>Comments:</p>
+                    {post.comments.map((comment) => {
+                        return (
+                            <Comment comment={comment} />
+                        )
+                    })}
+                </div>
+            }
+
 
         </div>
     )

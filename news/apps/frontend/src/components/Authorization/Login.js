@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {useHistory} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import csrftoken from './csrftoken.js';
 
 const Login = () => {
@@ -11,13 +11,13 @@ const Login = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
-            window.location.replace('/dashboard');
+            history.push('/dashboard');
         } else {
             setLoading(false);
         }
     }, []);
 
-    const onSubmit = e => {
+    const onSubmit = (e) => {
         e.preventDefault();
 
         const user = {
@@ -37,6 +37,18 @@ const Login = () => {
                 if (data.key) {
                     localStorage.clear();
                     localStorage.setItem('token', data.key);
+                        fetch('/api/v1/auth/user/', {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                Authorization: `Token ${data.key}`
+                            }
+                        })
+                            .then(res => res.json())
+                            .then(userdata => {
+                                localStorage.setItem('author', userdata.username)
+                                setLoading(false);
+                            });
                     history.push('/');
                 } else {
                     setUsername('');
@@ -45,12 +57,13 @@ const Login = () => {
                     setErrors(true);
                 }
             });
+
     };
 
     return (
         <div>
             {loading === false && <h1>Login</h1>}
-            {errors === true && <h2>Cannot log in with provided credentials</h2>}
+            {errors === true && <h2>Login failed</h2>}
             {loading === false && (
                 <form onSubmit={onSubmit}>
                     <label htmlFor='username'>Username:</label> <br />
@@ -60,7 +73,7 @@ const Login = () => {
                         value={username}
                         required
                         onChange={e => setUsername(e.target.value)}
-                    />{' '}
+                    />
                     <br />
                     <label htmlFor='password'>Password:</label> <br />
                     <input
@@ -69,7 +82,7 @@ const Login = () => {
                         value={password}
                         required
                         onChange={e => setPassword(e.target.value)}
-                    />{' '}
+                    />
                     <br />
                     <input type='submit' value='Login' />
                 </form>

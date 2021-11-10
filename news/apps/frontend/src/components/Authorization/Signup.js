@@ -11,13 +11,13 @@ const Signup = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      window.location.replace('/dashboard');
+      history.push('/dashboard')
     } else {
       setLoading(false);
     }
   }, []);
 
-  const onSubmit = e => {
+  const onSubmit = (e) => {
     e.preventDefault();
 
     const user = {
@@ -52,7 +52,7 @@ const Signup = () => {
   return (
     <div>
       {loading === false && <h1>Signup</h1>}
-      {errors === true && <h2>Cannot signup with provided credentials</h2>}
+      {errors === true && <h2>Unable to register</h2>}
       <form onSubmit={onSubmit}>
         <label htmlFor='username'>Username:</label> <br />
         <input
@@ -61,7 +61,7 @@ const Signup = () => {
           value={username}
           onChange={e => setUsername(e.target.value)}
           required
-        />{' '}
+        />
         <br />
         <label htmlFor='password1'>Password:</label> <br />
         <input
@@ -70,7 +70,7 @@ const Signup = () => {
           value={password1}
           onChange={e => setPassword1(e.target.value)}
           required
-        />{' '}
+        />
         <br />
         <label htmlFor='password2'>Confirm password:</label> <br />
         <input
