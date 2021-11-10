@@ -53,7 +53,7 @@ const NewsDetail = (props) => {
                 <p>{post.total_votes} votes from [{post.voters.join(', ')}]</p>
             </div>
             <div style={{ widows: 500, height: 100 }}>
-                <AddCommentForm postID={post.id} />
+                <AddCommentForm postID={post.id} method='POST' />
             </div>
             {post.comments.length > 0 &&
                 <div>

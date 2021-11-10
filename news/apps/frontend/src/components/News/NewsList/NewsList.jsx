@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import NewsPost from './NewsPost/NewsPost.jsx';
-import AddNewsForm from "../AddNewsForm/AddNewsForm.jsx";
+import CreateEditNewsForm from "../CreateEditNewsForm/CreateEditNewsForm.jsx";
 
 const NewsList = (props) => {
     const [posts, setPosts] = useState([{
@@ -14,20 +14,24 @@ const NewsList = (props) => {
         total_votes: null,
         voters: ['']
     }])
-    console.log('local storage',localStorage)
+    const [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
+      if (localStorage.getItem('token') !== null) {
+        setIsAuth(true);
+      }
         fetch('/api/v1/news/list')
             .then(response => { return response.json(); })
             .then((data) => {
                 setPosts(data);
-                console.log("FETCH", data)
             })
     }, [props]);
 
     return (
         <div>
-            <AddNewsForm />
+            {isAuth && 
+            <CreateEditNewsForm action='create' />
+            }
             <p>News list:</p>
             <div>
                 {posts.map((post, index) => {
