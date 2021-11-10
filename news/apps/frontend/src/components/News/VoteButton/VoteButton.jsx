@@ -3,6 +3,7 @@ import csrftoken from "../../Authorization/csrftoken";
 
 const VoteButton = (props) => {
 
+
     const onClick = (e) => {
         e.preventDefault();
 
