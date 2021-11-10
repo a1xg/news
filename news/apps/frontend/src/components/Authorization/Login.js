@@ -46,7 +46,7 @@ const Login = () => {
                         })
                             .then(res => res.json())
                             .then(userdata => {
-                                localStorage.setItem('author', userdata.username)
+                                localStorage.setItem('user', userdata.username)
                                 setLoading(false);
                             });
                     history.push('/');

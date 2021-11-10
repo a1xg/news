@@ -3,7 +3,6 @@ import csrftoken from '../../Authorization/csrftoken';
 import { useHistory } from 'react-router-dom';
 
 const CreateEditNewsForm = (props) => {
-    console.log('CreateEditNewsForm props:', props)
     const history = useHistory();
     const [title, setTitle] = useState('');
     const [link, setLink] = useState('');
@@ -21,7 +20,7 @@ const CreateEditNewsForm = (props) => {
             props.link != null ? setLink(props.link) : setLink('')
         }
 
-    }, [props])
+    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -37,8 +36,11 @@ const CreateEditNewsForm = (props) => {
             },
             body: JSON.stringify(news)
         });
+        
+        setUrl('');
+        setTitle('');
         history.push('/');
-        props.setEditHandler(false);
+        props.setEditMode(false);
     };
 
     return (

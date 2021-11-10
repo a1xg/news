@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Comment from './Comment/Comment.jsx';
-import AddCommentForm from './AddCommentForm/AddCommentForm.jsx';
+import CreateEditCommentForm from './CreateEditCommentForm/CreateEditCommentForm.jsx';
+import CreateEditNewsForm from "../CreateEditNewsForm/CreateEditNewsForm.jsx";
 
 const NewsDetail = (props) => {
-    console.log('NewsDetail props', props)
+    console.log('NewsDetail props', props);
+    const [editMode, setEditMode] = useState(false);
+    const [isAuthor, setIsAutror] = useState(false);
+    const history = useHistory();
     const [post, setPost] = useState({
         id: null,
         total_votes: null,
@@ -14,26 +18,41 @@ const NewsDetail = (props) => {
         creation_date: '',
         title: '',
         link: '',
-        comments: [
-            {
-                id: null,
-                author_name: '',
-                creation_date: '',
-                content: '',
-                news: null
-            },
-        ],
+        comments: [],
     })
 
     useEffect(() => {
+        const user = localStorage.getItem('user');
+        
+        console.log('user', user);
+        console.log('author name', post.author_name)
+
         fetch(`/api/v1/news/detail/${props.match.params.postID}`)
             .then(response => { return response.json(); })
             .then((data) => {
                 setPost(data);
-                console.log(data)
+                if (data.author_name === user) {
+                    setIsAutror(true);
+                };
             })
     }, []);
 
+    const onDelete = (e) => {
+        e.preventDefault();
+        fetch(`/api/v1/news/detail/${post.id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken,
+            },
+        });
+        history.push('/');
+    }
+
+    const onEdit = (e) => {
+        e.preventDefault();
+        setEditMode(true)
+    };
 
     return (
         <div>
@@ -42,19 +61,43 @@ const NewsDetail = (props) => {
             </Link>
             <p>News:</p>
             <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
-                <a href=''>edit </a> |
-                <a href=''> delete</a>
-                <p>
-                    <a href={post.link}>
-                        {post.title}
-                    </a>
-                </p>
-                <p>Creation date: {post.creation_date} by {post.author_name} | {post.total_comments} comments</p>
-                <p>{post.total_votes} votes from [{post.voters.join(', ')}]</p>
+                {editMode == false &&
+                    <div>
+                        {isAuthor &&
+                            <div>
+                                <a href='' onClick={onEdit}>edit </a> |
+                                <a href='' onClick={onDelete}> delete</a>
+                            </div>
+                        }
+                        <p>
+                            <a href={post.link}>
+                                {post.title}
+                            </a>
+                        </p>
+                        <p>id {post.id} |Creation date: {post.creation_date} by {post.author_name} | {post.total_comments} comments</p>
+                        <p>{post.total_votes} votes from [{post.voters.join(', ')}]</p>
+                    </div>
+                }
+                {editMode &&
+                    <CreateEditNewsForm
+                        action='edit'
+                        newsID={post.id}
+                        title={post.title}
+                        link={post.link}
+                        setEditMode={setEditMode}
+                    />
+                }
             </div>
-            <div style={{ widows: 500, height: 100 }}>
-                <AddCommentForm postID={post.id} method='POST' />
-            </div>
+
+            {post.id != null &&
+                <div style={{ widows: 500, height: 100 }}>
+                    <CreateEditCommentForm
+                        postID={post.id}
+                        action='create'
+                        setEditMode={setEditMode}
+                    />
+                </div>
+            }
             {post.comments.length > 0 &&
                 <div>
                     <p>Comments:</p>
@@ -65,8 +108,6 @@ const NewsDetail = (props) => {
                     })}
                 </div>
             }
-
-
         </div>
     )
 };

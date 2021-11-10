@@ -7,7 +7,7 @@ const Account = () => {
       {localStorage.author && (
         <Fragment>
           <h1>Account</h1>
-          <h2>Hello {localStorage.author}!</h2>
+          <h2>Hello {localStorage.getItem('user')}!</h2>
         </Fragment>
       )}
     </div>
