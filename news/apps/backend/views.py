@@ -1,39 +1,24 @@
-from . import models
 from django.db.models import Count
 from rest_framework import generics, permissions
-from . import pagination
 from . import serializers
 from .models import News, Comment
-from .permissions import *
-
-# TODO
-#  сделать систему сброса счетчика каждые сутки
-#  разобраться с методами RetrieveUpdateDestroyAPIView и реализовать UPDATE DELETE на react
-
-class CreateUserView(generics.CreateAPIView):
-    model = models.CustomUser
-    permission_classes = [
-        permissions.AllowAny
-    ]
-    serializer_class = serializers.UserSerializer
+from . import permissions as custompermissions
 
 
 class NewsCreateView(generics.CreateAPIView):
     serializer_class = serializers.NewsCreateSerializer
     permission_classes = (permissions.IsAuthenticated,)
 
-class NewsDetailView (generics.RetrieveUpdateDestroyAPIView):
+
+class NewsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.NewsDetailSerializer
-    permission_classes = (IsOwnerOrReadOnly, )
+    permission_classes = (custompermissions.IsOwnerOrReadOnly,)
     queryset = News.objects.all()
 
 
-class NewsListView (generics.ListAPIView):
+class NewsListView(generics.ListAPIView):
     serializer_class = serializers.NewsSerializer
-    #pagination_class = pagination.SmallPagesPagination
-    queryset = News.objects.annotate(
-        count=Count('votes')
-    ).order_by('-count')
+    queryset = News.objects.annotate(count=Count("votes")).order_by("-count")
 
 
 class CommentCreateView(generics.CreateAPIView):
@@ -43,7 +28,7 @@ class CommentCreateView(generics.CreateAPIView):
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.CommentSerializer
-    permission_classes = (IsPostOrCommentOwner, )
+    permission_classes = (custompermissions.IsPostOrCommentOwner,)
     queryset = Comment.objects.all()
 
 

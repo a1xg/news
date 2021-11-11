@@ -1,64 +1,42 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class CustomUser (AbstractUser):
+
+class CustomUser(AbstractUser):
     pass
 
 
-class News (models.Model):
-    creation_date = models.DateTimeField(
-        auto_now_add=True
-    )
+class News(models.Model):
+    creation_date = models.DateTimeField(auto_now_add=True)
     author_name = models.ForeignKey(
-        CustomUser,
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True
+        CustomUser, on_delete=models.SET_NULL, blank=False, null=True
     )
-    title = models.CharField(
-        max_length=300,
-        blank=False
-    )
-    link = models.CharField(
-        max_length=300,
-        blank=False
-    )
+    title = models.CharField(max_length=300, blank=False)
+    link = models.CharField(max_length=500, blank=False)
 
 
-class Comment (models.Model):
+class Comment(models.Model):
     news = models.ForeignKey(
-        'News',
-        on_delete=models.CASCADE,
-        blank=False,
-        related_name='comments'
+        "News", on_delete=models.CASCADE, blank=False, related_name="comments"
     )
-    creation_date = models.DateTimeField(
-        auto_now_add=True
-    )
+    creation_date = models.DateTimeField(auto_now_add=True)
     author_name = models.ForeignKey(
-        CustomUser,
-        on_delete=models.SET_NULL,
-        blank=False,
-        null=True
+        CustomUser, on_delete=models.SET_NULL, blank=False, null=True
     )
-    content = models.TextField(
-        blank=False
-    )
+    content = models.TextField(blank=False)
 
 
-class VoteNews (models.Model):
+class VoteNews(models.Model):
     author_name = models.ForeignKey(
         CustomUser,
-        on_delete=models.CASCADE
-    )
+        on_delete=models.CASCADE)
     news = models.ForeignKey(
         News,
         on_delete=models.CASCADE,
-        related_name='votes'
-    )
+        related_name="votes")
 
     class Meta:
-        unique_together = ('author_name', 'news')
+        unique_together = ("author_name", "news")
 
     def __str__(self):
         return str(self.author_name)
