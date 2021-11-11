@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { Link, useHistory } from "react-router-dom";
 import CommentDisplayContainer from './Comment/CommentDisplayContainer.jsx';
 import CommentCreateContainer from "./Comment/CommentCreateContainer.jsx";
@@ -8,6 +8,7 @@ import NewsDetail from "./NewsDetail.jsx";
 const NewsDetailContainer = (props) => {
     const [editMode, setEditMode] = useState(false);
     const [isNewsAuthor, setNewsAuthor] = useState(false);
+    const [isAuth, setIsAuth] = useState(false);
     const history = useHistory();
     const [post, setPost] = useState({
         id: null,
@@ -29,6 +30,7 @@ const NewsDetailContainer = (props) => {
                 setPost(data);
                 if (data.author_name === user) {
                     setNewsAuthor(true);
+                    setIsAuth(true);
                 };
             })
     }, []);
@@ -58,11 +60,11 @@ const NewsDetailContainer = (props) => {
             <p>News:</p>
             <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
                 {editMode == false &&
-                    <NewsDetail 
-                    permission={isNewsAuthor} 
-                    onDelete={onDelete}
-                    onEdit={onEdit} 
-                    post={post}
+                    <NewsDetail
+                        permission={isNewsAuthor}
+                        onDelete={onDelete}
+                        onEdit={onEdit}
+                        post={post}
                     />
                 }
                 {editMode &&
@@ -81,21 +83,25 @@ const NewsDetailContainer = (props) => {
                     {post.comments.map((comment) => {
                         return (
                             <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
-                            <CommentDisplayContainer 
-                            comment={comment} 
-                            isNewsAuthor={isNewsAuthor}
-                            />
+                                <CommentDisplayContainer
+                                    comment={comment}
+                                    isNewsAuthor={isNewsAuthor}
+                                />
                             </div>
                         )
                     })}
                 </div>
             }
-            {post.id != null &&
-                <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
-                    <CommentCreateContainer
-                        postID={post.id}
-                    />
-                </div>
+            {isAuth &&
+                <Fragment>
+                    {post.id != null &&
+                        <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
+                            <CommentCreateContainer
+                                postID={post.id}
+                            />
+                        </div>
+                    }
+                </Fragment>
             }
         </div>
     )
