@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useState} from "react";
 import csrftoken from "../../Authorization/csrftoken";
 import { useHistory } from 'react-router-dom';
 
 const VoteButton = (props) => {
     const history = useHistory();
+    const [activevote, setActiveVote] = useState(true)
+
     const onClick = (e) => {
         e.preventDefault();
 
@@ -18,12 +20,18 @@ const VoteButton = (props) => {
             },
             body: JSON.stringify(vote)
         });
-
+        setActiveVote(false);
     };
 
 
     return (
-        <a href='' onClick={onClick}><h3>^vote^</h3></a>       
+        <div>
+        {activevote &&
+            <a href='' onClick={onClick}><h3>^vote^</h3></a> 
+        }
+        </div>
+        
+              
     )
 };
 

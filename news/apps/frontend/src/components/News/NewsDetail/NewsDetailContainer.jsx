@@ -75,25 +75,26 @@ const NewsDetailContainer = (props) => {
                     />
                 }
             </div>
-
-            {post.id != null &&
-                <div style={{ widows: 500, height: 100 }}>
-                    <CommentCreateContainer
-                        postID={post.id}
-                    />
-                </div>
-            }
             {post.comments.length > 0 &&
                 <div>
                     <p>Comments:</p>
                     {post.comments.map((comment) => {
                         return (
+                            <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
                             <CommentDisplayContainer 
                             comment={comment} 
                             isNewsAuthor={isNewsAuthor}
                             />
+                            </div>
                         )
                     })}
+                </div>
+            }
+            {post.id != null &&
+                <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
+                    <CommentCreateContainer
+                        postID={post.id}
+                    />
                 </div>
             }
         </div>

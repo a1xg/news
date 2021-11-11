@@ -2,7 +2,7 @@ import React from "react"
 
 const Form = ({onSubmit, comment, setComment}) => {
     return (
-        <div style={{ width: 500, height: 250 }}>
+        <div>
             <form id='commentform' onSubmit={onSubmit}>
                 <label htmlFor='comment'>Add comment form:</label>
                 <br />
@@ -10,6 +10,7 @@ const Form = ({onSubmit, comment, setComment}) => {
             </form>
             <textarea 
             form='commentform' 
+            placeholder='Leave your comment here'
             name='comment' 
             style={{ width: '100%' }} 
             value={comment}

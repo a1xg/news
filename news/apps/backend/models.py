@@ -12,7 +12,7 @@ class News(models.Model):
         CustomUser, on_delete=models.SET_NULL, blank=False, null=True
     )
     title = models.CharField(max_length=300, blank=False)
-    link = models.CharField(max_length=500, blank=False)
+    link = models.URLField(max_length=500, blank=False)
 
 
 class Comment(models.Model):

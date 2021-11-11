@@ -34,7 +34,7 @@ const CommentDisplayContainer = ({comment , isNewsAuthor}) => {
     };
 
     return (
-        <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
+        <div>
             {editMode == false &&
                 <div>
                     {isNewsAuthor == true | isCommentAuthor == true &&
