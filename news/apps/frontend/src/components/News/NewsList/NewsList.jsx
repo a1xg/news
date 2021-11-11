@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import NewsPost from './NewsPost/NewsPost.jsx';
-import CreateEditNewsForm from "../CreateEditNewsForm/CreateEditNewsForm.jsx";
+import NewsPostContainer from './NewsPostContainer.jsx';
+import NewsCreateContainer from "../NewsForms/NewsCreateContainer.jsx";
 
 const NewsList = (props) => {
     const [posts, setPosts] = useState([{
@@ -17,9 +17,9 @@ const NewsList = (props) => {
     const [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
-      if (localStorage.getItem('token') !== null) {
-        setIsAuth(true);
-      }
+        if (localStorage.getItem('token') !== null) {
+            setIsAuth(true);
+        }
         fetch('/api/v1/news/list')
             .then(response => { return response.json(); })
             .then((data) => {
@@ -29,16 +29,18 @@ const NewsList = (props) => {
 
     return (
         <div>
-            {isAuth && 
-            <CreateEditNewsForm action='create' />
+            {isAuth &&
+                <NewsCreateContainer />
             }
             <p>News list:</p>
             <div>
                 {posts.map((post, index) => {
                     return (
-                        <div key={post.id}>
-                            <NewsPost post={post} position={index} />
-                        </div>
+                        <NewsPostContainer
+                            key={post.id}
+                            post={post}
+                            position={index}
+                        />
                     )
                 })}
 

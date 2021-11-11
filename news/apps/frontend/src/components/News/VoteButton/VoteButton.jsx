@@ -8,7 +8,7 @@ const VoteButton = (props) => {
         e.preventDefault();
 
         const vote = {
-            news:props.postID,
+            news: props.postID,
         };
         fetch(`/api/v1/news/detail/${props.postID}/vote/add`, {
             method: 'POST',
@@ -19,14 +19,11 @@ const VoteButton = (props) => {
             body: JSON.stringify(vote)
         });
 
-
     };
 
 
     return (
-        <a href='' onClick={onClick}><h3>^vote^</h3></a>
-    
-           
+        <a href='' onClick={onClick}><h3>^vote^</h3></a>       
     )
 };
 

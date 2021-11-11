@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import csrftoken from '../../../Authorization/csrftoken';
-import Form from './Form.jsx';
+import CommentForm from './CommentForm.jsx';
 
-const CreateContainer = ({postID}) => {
+const CommentCreateContainer = ({postID}) => {
     const [comment, setComment] = useState('');
     const history = useHistory();
 
@@ -26,7 +26,7 @@ const CreateContainer = ({postID}) => {
     };
 
     return (
-        <Form 
+        <CommentForm 
         setComment={setComment}
         onSubmit={onSubmit}
         comment={comment}
@@ -34,4 +34,4 @@ const CreateContainer = ({postID}) => {
     )
 };
 
-export default CreateContainer;
+export default CommentCreateContainer;

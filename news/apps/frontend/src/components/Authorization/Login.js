@@ -11,7 +11,7 @@ const Login = () => {
 
     useEffect(() => {
         if (localStorage.getItem('token') !== null) {
-            history.push('/dashboard');
+            history.push('/account');
         } else {
             setLoading(false);
         }

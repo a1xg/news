@@ -27,7 +27,6 @@ const Logout = () => {
     })
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         localStorage.clear();
         history.push('/');
 

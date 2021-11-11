@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import csrftoken from '../../../Authorization/csrftoken';
-import Form from './Form.jsx';
+import CommentForm from './CommentForm.jsx';
 
 const EditContainer = ({comment, setEditMode}) => {
     const [correctedComment, setCorrectedComment] = useState('');
@@ -31,7 +31,7 @@ const EditContainer = ({comment, setEditMode}) => {
     }
 
     return (
-        <Form
+        <CommentForm
             setComment={setCorrectedComment}
             onSubmit={onSubmit}
             comment={correctedComment}

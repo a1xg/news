@@ -17,9 +17,8 @@ const NavBar = (props) => {
       <ul>
         {isAuth === true ? (
           <Fragment>
-            {' '}
             <li>
-            <NavLink to='/dashboard'>{user}</NavLink>
+            <NavLink to='/account'>{user}</NavLink>
             </li>
             <li>
             <NavLink to='/logout'>Logout</NavLink>
