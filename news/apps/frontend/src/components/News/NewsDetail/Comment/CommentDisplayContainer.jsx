@@ -1,29 +1,26 @@
 import React, { useState, useEffect } from "react";
-import CreateEditCommentForm from "../CreateEditCommentForm/CreateEditCommentForm.jsx";
 import csrftoken from "../../../Authorization/csrftoken";
+import CommentEditContainer from "./CommentEditContainer.jsx";
 
-const Comment = (props) => {
-    //console.log('Comment props', props)
-    const [isAuthor, setIsAutror] = useState(false);
+// isCommentAuthor - Allowing comment editing for the author of the comment
+// isNewsAuthor - Allowing comment editing for the author of the news
+const Comment = ({comment , isNewsAuthor}) => {
+    const [isCommentAuthor, setIsCommentAutror] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
     useEffect(() => {
         if (localStorage.getItem('user') !== null) {
-            const user = localStorage.getItem('user')
-            console.log('author name', props.comment)
-            console.log('user', user)
-            
-            if (props.comment.author_name == user) {
-                setIsAutror(true);
-            }
+            const user = localStorage.getItem('user');
+            if (comment.author_name == user) {
+                setIsCommentAutror(true);
+            };
         }
-
     }, []);
 
     const onDelete = (e) => {
         e.preventDefault();
         console.log('delete');
-        fetch(`/api/v1/comment/detail/${props.comment.id}`, {
+        fetch(`/api/v1/comment/detail/${comment.id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,35 +31,31 @@ const Comment = (props) => {
 
     const onEdit = (e) => {
         e.preventDefault();
-        console.log('edit');
         setEditMode(true);
     };
-
-
 
     return (
         <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
             {editMode == false &&
                 <div>
-                    {isAuthor &&
+                    {isNewsAuthor == true | isCommentAuthor == true &&
                         <div style={{ top: 5, right: 5 }}>
                             <a href='' onClick={onEdit}>edit |</a>
                             <a href='' onClick={onDelete}> delete</a>
                         </div>
                     }
                     <div>
-                        <p>id {props.comment.id} Author: {props.comment.author_name}</p>
-                        <p>{props.comment.creation_date}</p>
-                        <p>{props.comment.content}</p>
+                        <p>id {comment.id} Author: {comment.author_name}</p>
+                        <p>{comment.creation_date}</p>
+                        <p>{comment.content}</p>
                     </div>
                 </div>
             }
             {editMode &&
-            <CreateEditCommentForm 
-                comment={props.comment}
-                action='edit'
-                setEditMode={setEditMode}
-            />
+                <CommentEditContainer
+                    comment={comment}
+                    setEditMode={setEditMode}
+                />
             }
         </div >
     )
