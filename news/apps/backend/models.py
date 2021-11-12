@@ -29,11 +29,13 @@ class Comment(models.Model):
 class VoteNews(models.Model):
     author_name = models.ForeignKey(
         CustomUser,
-        on_delete=models.CASCADE)
+        on_delete=models.CASCADE
+    )
     news = models.ForeignKey(
         News,
         on_delete=models.CASCADE,
-        related_name="votes")
+        related_name="votes"
+    )
 
     class Meta:
         unique_together = ("author_name", "news")

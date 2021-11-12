@@ -4,7 +4,7 @@ import CommentEditContainer from "./CommentEditContainer.jsx";
 
 // isCommentAuthor - Allowing comment editing for the author of the comment
 // isNewsAuthor - Allowing comment editing for the author of the news
-const CommentDisplayContainer = ({comment , isNewsAuthor}) => {
+const CommentDisplayContainer = ({ comment, isNewsAuthor }) => {
     const [isCommentAuthor, setIsCommentAutror] = useState(false);
     const [editMode, setEditMode] = useState(false);
 
@@ -43,11 +43,15 @@ const CommentDisplayContainer = ({comment , isNewsAuthor}) => {
                             <a href='' onClick={onDelete}> delete</a>
                         </div>
                     }
-                    <div>
-                        <p>id {comment.id} Author: {comment.author_name}</p>
-                        <p>{comment.creation_date}</p>
-                        <p>{comment.content}</p>
-                    </div>
+                    <span>
+                        {
+                        ` id: ${comment.id} 
+                        author: ${comment.author_name} 
+                        date: ${new Date(comment.creation_date).toLocaleDateString()}`
+                        }
+                    </span>
+                    <br />
+                    <span>{comment.content}</span>
                 </div>
             }
             {editMode &&

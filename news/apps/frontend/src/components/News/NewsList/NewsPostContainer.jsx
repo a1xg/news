@@ -43,7 +43,7 @@ const NewsPostContainer = (props) => {
 
     return (
 
-        <div style={{ width: 500, height: 250, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
+        <div style={{ width: 500, height: 100, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
             {editMode == false &&
                 <NewsPost
                     position={props.position}

@@ -1,6 +1,6 @@
 import React from "react";
 
-const NewsDetail = ({permission, onDelete, onEdit, post}) => {
+const NewsDetail = ({ permission, onDelete, onEdit, post }) => {
     return (
         <div>
             {permission &&
@@ -14,8 +14,16 @@ const NewsDetail = ({permission, onDelete, onEdit, post}) => {
                     {post.title}
                 </a>
             </p>
-            <p>id {post.id} |Creation date: {post.creation_date} by {post.author_name} | {post.total_comments} comments</p>
-            <p>{post.total_votes} votes from [{post.voters.join(', ')}]</p>
+            <span>
+            {
+            `id: ${post.id} | 
+            date: ${new Date(post.creation_date).toLocaleDateString()} | 
+            author: ${post.author_name} | 
+            total comments: ${post.total_comments} | 
+            ${post.total_votes} votes  
+            from: [${post.voters.join(', ')}]`
+            }
+            </span>
         </div>
     )
 };

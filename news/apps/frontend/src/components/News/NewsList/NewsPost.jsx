@@ -6,7 +6,6 @@ import VoteButton from "../VoteButton/VoteButton.jsx";
 const NewsPost = (props) => {
     return (
         <div>
-            <p>Position: {props.position}</p>
             {props.activeVote &&
                 <VoteButton postID={props.post.id} />
             }
@@ -16,11 +15,20 @@ const NewsPost = (props) => {
                     <a href='' onClick={props.onDelete}> delete</a>
                 </p>
             }
-
             <a href={props.post.link}>
                 {props.post.title}
             </a>
-            <p>id {props.post.id} | Author [ {props.post.author_name} | {props.post.creation_date} ] | {props.post.total_votes} votes from: {props.post.voters.join(', ')} </p>
+            <br />
+            <span>
+                {
+                `Position: ${props.position} | 
+                id: ${props.post.id} | 
+                Author: ${props.post.author_name} | 
+                Date: ${new Date(props.post.creation_date).toLocaleDateString()} | 
+                Total votes: ${props.post.total_votes} 
+                from: [${props.post.voters.join(', ')}]`
+                }
+            </span>
             <NavLink to={`/news/detail/${props.post.id}`} >
                 <p>{props.post.total_comments} comments</p>
             </NavLink>

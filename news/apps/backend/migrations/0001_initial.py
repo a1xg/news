@@ -63,7 +63,8 @@ class Migration(migrations.Migration):
                         max_length=150,
                         unique=True,
                         validators=[
-                            django.contrib.auth.validators.UnicodeUsernameValidator()
+                            django.contrib.auth.validators.
+                            UnicodeUsernameValidator()
                         ],
                         verbose_name="username",
                     ),

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
+import csrftoken from './csrftoken';
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -11,7 +12,7 @@ const Signup = () => {
 
   useEffect(() => {
     if (localStorage.getItem('token') !== null) {
-      history.push('/dashboard')
+      history.push('/account')
     } else {
       setLoading(false);
     }
@@ -29,7 +30,8 @@ const Signup = () => {
     fetch('/api/v1/auth/register/', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'X-CSRFToken': csrftoken,
       },
       body: JSON.stringify(user)
     })
