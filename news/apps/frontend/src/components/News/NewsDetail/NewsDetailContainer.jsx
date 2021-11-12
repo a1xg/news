@@ -28,9 +28,11 @@ const NewsDetailContainer = (props) => {
             .then(response => { return response.json(); })
             .then((data) => {
                 setPost(data);
+                if (user) {
+                    setIsAuth(true);
+                }
                 if (data.author_name === user) {
                     setNewsAuthor(true);
-                    setIsAuth(true);
                 };
             })
     }, []);
