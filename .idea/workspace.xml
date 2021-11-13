@@ -26,91 +26,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1227a6e5-abb0-4316-996c-8c4edc87ec59" name="Default Changelist" comment="Auth bug fix">
-      <change afterPath="$PROJECT_DIR$/frontend/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Authorization/Account.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Authorization/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Authorization/Logout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Authorization/Signup.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/Authorization/csrftoken.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/NavBar/NavBar.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsDetail/Comment/CommentCreateContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsDetail/Comment/CommentDisplayContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsDetail/Comment/CommentEditContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsDetail/Comment/CommentForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsDetail/NewsDetail.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsDetail/NewsDetailContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsForms/NewsCreateContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsForms/NewsEditContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsForms/NewsForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsList/NewsList.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsList/NewsPost.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/NewsList/NewsPostContainer.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/components/News/VoteButton/VoteButton.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/webpack.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/forms.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/migrations/0002_alter_news_link.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/pagination.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/permissions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/serializers.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/backend/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/babel.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/public/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/public/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/App.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/Authorization/Account.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/Authorization/Login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/Authorization/Logout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/Authorization/Signup.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/Authorization/csrftoken.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/NavBar/NavBar.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsDetail/Comment/CommentCreateContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsDetail/Comment/CommentDisplayContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsDetail/Comment/CommentEditContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsDetail/Comment/CommentForm.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsDetail/NewsDetail.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsDetail/NewsDetailContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsForms/NewsCreateContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsForms/NewsEditContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsForms/NewsForm.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsList/NewsList.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsList/NewsPost.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/NewsList/NewsPostContainer.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/components/News/VoteButton/VoteButton.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/src/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/static/frontend/0.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/static/frontend/main.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/templates/frontend/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/apps/frontend/webpack.config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/asgi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/settings.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/wsgi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/migrations/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/apps.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/migrations/0001_initial.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/migrations/0002_alter_news_link.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/migrations/0002_alter_news_link.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/pagination.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/pagination.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/permissions.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/permissions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/apps/backend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/backend/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/news/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/news/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,6 +62,7 @@
     <option name="hiddenUrls">
       <set>
         <option value="https://github.com/a1xg/etox.git" />
+        <option value="https://github.com/a1xg/news" />
       </set>
     </option>
   </component>
@@ -151,14 +83,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\python_projects\news\news\apps\frontend" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\python_projects\news\backend\news" />
       <recent name="D:\python_projects\news" />
       <recent name="D:\python_projects\news\news" />
       <recent name="D:\python_projects\news\backend" />
       <recent name="D:\python_projects\news\news\apps" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\python_projects\news\news\apps\frontend" />
     </key>
   </component>
   <component name="SvnConfiguration">
