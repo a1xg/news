@@ -4,6 +4,7 @@ import CommentDisplayContainer from './Comment/CommentDisplayContainer.jsx';
 import CommentCreateContainer from "./Comment/CommentCreateContainer.jsx";
 import NewsEditContainer from "../NewsForms/NewsEditContainer.jsx";
 import NewsDetail from "./NewsDetail.jsx";
+import csrftoken from "../../Authorization/csrftoken.js";
 
 const NewsDetailContainer = (props) => {
     const [editMode, setEditMode] = useState(false);

@@ -24,13 +24,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'backend',
-    'frontend',
     'rest_framework.authtoken',
     'rest_auth',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount',
+    #'allauth.socialaccount',
     'rest_auth.registration',
     'corsheaders',
 ]
@@ -129,3 +128,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
 ],
 }
+
+# for react server
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
+       'https://localhost:3000',
+)
+
