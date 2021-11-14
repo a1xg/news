@@ -1,7 +1,6 @@
 from pathlib import Path
-import os,sys
-
-from datetime import timedelta
+import os
+import sys
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -9,7 +8,8 @@ PROJECT_ROOT = os.path.dirname(__file__)
 
 sys.path.insert(0, os.path.join(PROJECT_ROOT, ''))
 
-SECRET_KEY = 'django-insecure-+a5(opoz1g^5e--nxpr@g=7d-1(mvxe&4qk6t+stye@x+bur%%'
+SECRET_KEY = 'django-insecure-+a5(opoz1g^5e--' \
+             'nxpr@g=7d-1(mvxe&4qk6t+stye@x+bur%%'
 
 DEBUG = True
 
@@ -29,7 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    #'allauth.socialaccount',
+    'allauth.socialaccount',
     'rest_auth.registration',
     'corsheaders',
 ]
@@ -68,7 +68,7 @@ WSGI_APPLICATION = 'news.wsgi.application'
 AUTH_USER_MODEL = "backend.CustomUser"
 
 DATABASES = {
-        'default': {
+    'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'news',
         'USER': 'news_admin',
@@ -80,16 +80,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.'
+                'NumericPasswordValidator',
     },
 ]
 
@@ -124,9 +128,9 @@ LOGIN_REDIRECT_URL = '/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        #'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
-],
+    ],
 }
 
 # for react server
@@ -135,4 +139,3 @@ CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
        'https://localhost:3000',
 )
-

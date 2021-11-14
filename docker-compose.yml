@@ -1,0 +1,47 @@
+version: "3.8"
+services:
+  db:
+    restart: unless-stopped
+    image: postgres:10-alpine
+    environment:
+      - POSTGRES_DB=news
+      - POSTGRES_USER=news_admin
+      - POSTGRES_PASSWORD=news_admin
+    ports:
+      - "5432-5432"
+
+  backend:
+    restart: always
+    container_name: code
+    command : bash -c "python check_db.py --service-name db --ip db --port 3306 &&
+                      python manage.py migrate &&
+                      python manage.py runserver 0.0.0.0:8000"
+    build:
+      context: ./backend/
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    networks:
+      - db-net
+
+  frontend:
+    restart: always
+    command : npm start
+    container_name: front
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    depends_on:
+      - project
+    networks:
+      - db-net
+
+networks:
+  db-net:
+    driver: bridge
