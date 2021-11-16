@@ -7,9 +7,7 @@ const Logout = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.getItem('token') == null) {
-      history.push('/login/')
-    } else {
+    if (localStorage.getItem('token') === null) {
       setLoading(false);
     }
   }, []);

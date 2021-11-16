@@ -22,7 +22,7 @@ const NewsPostContainer = (props) => {
                 setIsNewsAutror(true);
             }
         }
-    }, []);
+    }, [post.author_name, post.voters]);
 
     const onDelete = (e) => {
         e.preventDefault();
@@ -44,7 +44,7 @@ const NewsPostContainer = (props) => {
     return (
 
         <div style={{ width: 500, height: 180, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
-            {editMode == false &&
+            {editMode === false &&
                 <NewsPost
                     position={props.position}
                     onEdit={onEdit}

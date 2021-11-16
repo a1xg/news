@@ -10,9 +10,7 @@ const Login = () => {
     const history = useHistory();
 
     useEffect(() => {
-        if (localStorage.getItem('token') !== null) {
-            history.push('/account');
-        } else {
+        if (localStorage.getItem('token') === null) {
             setLoading(false);
         }
     }, []);

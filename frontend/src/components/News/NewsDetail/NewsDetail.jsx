@@ -5,8 +5,8 @@ const NewsDetail = ({ permission, onDelete, onEdit, post }) => {
         <div>
             {permission &&
                 <div>
-                    <a href='' onClick={onEdit}>edit </a> |
-                    <a href='' onClick={onDelete}> delete</a>
+                    <a href='/#' onClick={onEdit}>edit </a> |
+                    <a href='/#' onClick={onDelete}> delete</a>
                 </div>
             }
             <p>

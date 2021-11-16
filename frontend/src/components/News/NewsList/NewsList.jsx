@@ -7,7 +7,6 @@ const NewsList = (props) => {
         id: null,
         author_name: '',
         creation_date: '',
-        id: null,
         link: '',
         title: '',
         total_comments: null,

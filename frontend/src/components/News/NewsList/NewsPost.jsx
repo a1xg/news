@@ -11,8 +11,8 @@ const NewsPost = (props) => {
             }
             {props.permission &&
                 <p>
-                    <a href='' onClick={props.onEdit}> edit </a>|
-                    <a href='' onClick={props.onDelete}> delete</a>
+                    <a href='/#' onClick={props.onEdit}> edit </a>|
+                    <a href='/#' onClick={props.onDelete}> delete</a>
                 </p>
             }
             <a href={props.post.link}>

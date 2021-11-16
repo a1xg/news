@@ -9,7 +9,7 @@ const EditContainer = ({comment, setEditMode}) => {
 
     useEffect(() => {
         setCorrectedComment(comment.content);
-    }, []);
+    }, [comment.content]);
 
     const onSubmit = (e) => {
         e.preventDefault();

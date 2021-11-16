@@ -11,11 +11,11 @@ const CommentDisplayContainer = ({ comment, isNewsAuthor }) => {
     useEffect(() => {
         if (localStorage.getItem('user') !== null) {
             const user = localStorage.getItem('user');
-            if (comment.author_name == user) {
+            if (comment.author_name === user) {
                 setIsCommentAutror(true);
             };
         }
-    }, []);
+    }, [comment.author_name]);
 
     const onDelete = (e) => {
         e.preventDefault();
@@ -35,12 +35,12 @@ const CommentDisplayContainer = ({ comment, isNewsAuthor }) => {
 
     return (
         <div>
-            {editMode == false &&
+            {editMode === false &&
                 <div>
-                    {isNewsAuthor == true | isCommentAuthor == true &&
+                    {isNewsAuthor === true | isCommentAuthor === true &&
                         <div style={{ top: 5, right: 5 }}>
-                            <a href='' onClick={onEdit}>edit |</a>
-                            <a href='' onClick={onDelete}> delete</a>
+                            <a href='/#' onClick={onEdit}>edit |</a>
+                            <a href='/#' onClick={onDelete}> delete</a>
                         </div>
                     }
                     <span>

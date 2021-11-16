@@ -1,7 +1,9 @@
-FROM node
+FROM node:14.18.1-alpine
+
 WORKDIR /app/frontend
-COPY package.json package-lock.json ./
+COPY  ./ /app/frontend
+
 RUN npm install
-RUN npm install react-scripts@4.0.3 -g
-COPY . ./
+
 EXPOSE 3000
+CMD [ "npm", "start" ]

@@ -36,7 +36,7 @@ const NewsDetailContainer = (props) => {
                     setNewsAuthor(true);
                 };
             })
-    }, []);
+    }, [props.match.params.postID]);
 
     const onDelete = (e) => {
         e.preventDefault();
@@ -62,7 +62,7 @@ const NewsDetailContainer = (props) => {
             </Link>
             <p>News:</p>
             <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
-                {editMode == false &&
+                {editMode === false &&
                     <NewsDetail
                         permission={isNewsAuthor}
                         onDelete={onDelete}
