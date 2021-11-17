@@ -81,6 +81,7 @@ DATABASES = {
 }
 '''
 # database for docker image
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

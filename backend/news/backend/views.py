@@ -2,7 +2,7 @@ from django.db.models import Count
 from rest_framework import generics, permissions
 from . import serializers
 from .models import News, Comment
-from . import permissions as custompermissions
+from . import permissions as custom_permissions
 
 
 class NewsCreateView(generics.CreateAPIView):
@@ -12,7 +12,7 @@ class NewsCreateView(generics.CreateAPIView):
 
 class NewsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.NewsDetailSerializer
-    permission_classes = (custompermissions.IsOwnerOrReadOnly,)
+    permission_classes = (custom_permissions.IsOwnerOrReadOnly,)
     queryset = News.objects.all()
 
 
@@ -28,7 +28,7 @@ class CommentCreateView(generics.CreateAPIView):
 
 class CommentView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.CommentSerializer
-    permission_classes = (custompermissions.IsPostOrCommentOwner,)
+    permission_classes = (custom_permissions.IsPostOrCommentOwner,)
     queryset = Comment.objects.all()
 
 
