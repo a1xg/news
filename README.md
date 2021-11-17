@@ -6,7 +6,7 @@
 #### Run docker-compose
 ```docker-compose up```
 
-* The DRF-API server will be launched, accessible by localhost:8000/api/v1/news/list
+* The DRF-API server will be launched, accessible by http://localhost:8000/api/v1/news/list
 * The front-end server will be launched at http://localhost:3000
 
 
