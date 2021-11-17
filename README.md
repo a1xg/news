@@ -1,3 +1,4 @@
+## Deploy
 
 #### Copy the repository
 ```git clone https://github.com/a1xg/news.git```
@@ -10,7 +11,7 @@
 * The front-end server will be launched at http://localhost:3000
 
 
-### Postman API tests
+## Postman API tests
 
 * Create a new empty environment in Postman before running the collection
 * Import the Postman collection from the [link](https://github.com/a1xg/news/blob/master/News.postman_collection.json)
