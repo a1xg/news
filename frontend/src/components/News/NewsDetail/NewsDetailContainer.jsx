@@ -7,6 +7,7 @@ import NewsDetail from "./NewsDetail.jsx";
 import csrftoken from "../../Authorization/csrftoken.js";
 
 const NewsDetailContainer = (props) => {
+    console.log('NewsDetailContainer props', props)
     const [editMode, setEditMode] = useState(false);
     const [isNewsAuthor, setNewsAuthor] = useState(false);
     const [isAuth, setIsAuth] = useState(false);

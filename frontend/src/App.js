@@ -9,6 +9,7 @@ import Account from './components/Authorization/Account.js';
 import NavBar from './components/NavBar/NavBar.jsx';
 
 const App = (props) => {
+
   return (
     <BrowserRouter>
       <div className="app">
@@ -27,3 +28,4 @@ const App = (props) => {
 }
 
 export default App;
+

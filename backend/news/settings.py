@@ -67,16 +67,28 @@ WSGI_APPLICATION = 'news.wsgi.application'
 
 AUTH_USER_MODEL = "backend.CustomUser"
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'news',
         'USER': 'news_admin',
         'PASSWORD': 'news_admin',
-        'HOST': '127.0.0.1',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
+'''
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'news_db',
+        'PORT': '5432',
+    }
+}
+'''
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -128,7 +140,7 @@ LOGIN_REDIRECT_URL = '/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     ],
 }

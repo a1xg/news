@@ -1,7 +1,6 @@
 import { NavLink } from "react-router-dom";
 import React, { useState, useEffect, Fragment } from 'react';
 
-
 const NavBar = (props) => {
     const [isAuth, setIsAuth] = useState(false);
     const [user, setUser] = useState('')

@@ -1,9 +1,6 @@
 FROM node:14.18.1-alpine
 
-WORKDIR /app/frontend
-COPY  ./ /app/frontend
+WORKDIR /usr/src/frontend
+COPY  ./ /usr/src/frontend
 
 RUN npm install
-
-EXPOSE 3000
-CMD [ "npm", "start" ]

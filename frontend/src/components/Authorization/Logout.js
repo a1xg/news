@@ -7,10 +7,12 @@ const Logout = () => {
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.getItem('token') === null) {
+    if (localStorage.getItem('token') != null) {
       setLoading(false);
+    } else { 
+      history.push('/');
     }
-  }, []);
+  }, [history]);
 
   const handleLogout = (e) => {
     e.preventDefault();

@@ -13,8 +13,10 @@ const Signup = () => {
   useEffect(() => {
     if (localStorage.getItem('token') === null) {
       setLoading(false);
+    } else {
+      history.push('/');
     }
-  }, []);
+  }, [history]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -38,6 +40,7 @@ const Signup = () => {
         if (data.key) {
           localStorage.clear();
           localStorage.setItem('token', data.key);
+          localStorage.setItem('user', username);
           history.push('/');
         } else {
           setUsername('');

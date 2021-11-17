@@ -1,18 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import NewsPostContainer from './NewsPostContainer.jsx';
 import NewsCreateContainer from "../NewsForms/NewsCreateContainer.jsx";
 
 const NewsList = (props) => {
-    const [posts, setPosts] = useState([{
-        id: null,
-        author_name: '',
-        creation_date: '',
-        link: '',
-        title: '',
-        total_comments: null,
-        total_votes: null,
-        voters: ['']
-    }])
+    const [posts, setPosts] = useState([])
     const [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
@@ -31,19 +22,23 @@ const NewsList = (props) => {
             {isAuth &&
                 <NewsCreateContainer />
             }
-            <p>News list:</p>
-            <div>
-                {posts.map((post, index) => {
-                    return (
-                        <NewsPostContainer
-                            key={post.id}
-                            post={post}
-                            position={index}
-                        />
-                    )
-                })}
+            {posts.length > 0 &&
+                <Fragment>
+                    <p>News list:</p>
+                    <div>
+                        {posts.map((post, index) => {
+                            return (
+                                <NewsPostContainer
+                                    key={post.id}
+                                    post={post}
+                                    position={index}
+                                />
+                            )
+                        })}
+                    </div>
+                </Fragment>
+            }
 
-            </div>
         </div>
     )
 };

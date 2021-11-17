@@ -12,8 +12,10 @@ const Login = () => {
     useEffect(() => {
         if (localStorage.getItem('token') === null) {
             setLoading(false);
+        } else {
+            history.push('/')
         }
-    }, []);
+    }, [history]);
 
     const onSubmit = (e) => {
         e.preventDefault();
