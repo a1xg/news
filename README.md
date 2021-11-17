@@ -13,4 +13,4 @@
 ### Postman API tests
 
 * Create a new empty environment in Postman before running the collection
-* Import the Postman collection from the link
+* Import the Postman collection from the [link](https://github.com/a1xg/news/blob/master/News.postman_collection.json)
