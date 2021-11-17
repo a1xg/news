@@ -2,21 +2,18 @@ import React, { useState, useEffect } from 'react';
 import {useHistory} from 'react-router-dom';
 import csrftoken from './csrftoken';
 
-const Signup = () => {
+const Signup = ({isAuth, setIsAuth}) => {
   const [username, setUsername] = useState('');
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const [errors, setErrors] = useState(false);
-  const [loading, setLoading] = useState(true);
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.getItem('token') === null) {
-      setLoading(false);
-    } else {
+    if (isAuth === true) {
       history.push('/');
     }
-  }, [history]);
+  }, [isAuth, history]);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +38,7 @@ const Signup = () => {
           localStorage.clear();
           localStorage.setItem('token', data.key);
           localStorage.setItem('user', username);
-          history.push('/');
+          setIsAuth(true);
         } else {
           setUsername('');
           setPassword1('');
@@ -54,7 +51,7 @@ const Signup = () => {
 
   return (
     <div>
-      {loading === false && <h1>Signup</h1>}
+      {isAuth === false && <h1>Signup</h1>}
       {errors === true && <h2>Unable to register</h2>}
       <form onSubmit={onSubmit}>
         <label htmlFor='username'>Username:</label> <br />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import NewsList from './components/News/NewsList/NewsList.jsx';
 import NewsDetailContainer from './components/News/NewsDetail/NewsDetailContainer.jsx';
@@ -8,19 +8,69 @@ import Logout from './components/Authorization/Logout.js';
 import Account from './components/Authorization/Account.js';
 import NavBar from './components/NavBar/NavBar.jsx';
 
-const App = (props) => {
+const App = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem('token') != null) {
+      setIsAuth(true);
+    }
+  }, []);
 
   return (
     <BrowserRouter>
       <div className="app">
-        <NavBar />
+        <NavBar isAuth={isAuth} />
         <div>
-          <Route exact path='/' component={NewsList} />
-          <Route exact path='/news/detail/:postID' component={NewsDetailContainer} /> 
-          <Route exact path='/login' component={Login} />
-          <Route exact path='/signup' component={Signup} />
-          <Route exact path='/logout' component={Logout} /> 
-          <Route exact path='/account' component={Account} />        
+          <Route
+            exact path='/'
+            component={() =>
+              <NewsList isAuth={isAuth}
+              />
+            }
+          />
+          <Route
+            exact path='/news/detail/:postID'
+            component={(props) =>
+              <NewsDetailContainer
+                data={props}
+                isAuth={isAuth}
+              />
+            }
+          />
+          <Route
+            exact path='/login'
+            component={() =>
+              <Login
+                setIsAuth={setIsAuth}
+                isAuth={isAuth}
+              />
+            }
+          />
+          <Route
+            exact path='/signup'
+            component={() =>
+              <Signup
+                setIsAuth={setIsAuth}
+                isAuth={isAuth}
+              />
+            }
+          />
+          <Route
+            exact path='/logout'
+            component={() =>
+              <Logout
+                setIsAuth={setIsAuth}
+                isAuth={isAuth}
+              />
+            }
+          />
+          <Route
+            exact path='/account'
+            component={() =>
+              <Account isAuth={isAuth} />
+            }
+          />
         </div>
       </div>
     </BrowserRouter>
@@ -28,4 +78,3 @@ const App = (props) => {
 }
 
 export default App;
-

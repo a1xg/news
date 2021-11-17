@@ -6,11 +6,9 @@ import NewsEditContainer from "../NewsForms/NewsEditContainer.jsx";
 import NewsDetail from "./NewsDetail.jsx";
 import csrftoken from "../../Authorization/csrftoken.js";
 
-const NewsDetailContainer = (props) => {
-    console.log('NewsDetailContainer props', props)
+const NewsDetailContainer = ({data, isAuth}) => {
     const [editMode, setEditMode] = useState(false);
     const [isNewsAuthor, setNewsAuthor] = useState(false);
-    const [isAuth, setIsAuth] = useState(false);
     const history = useHistory();
     const [post, setPost] = useState({
         id: null,
@@ -26,18 +24,16 @@ const NewsDetailContainer = (props) => {
 
     useEffect(() => {
         const user = localStorage.getItem('user');
-        fetch(`/api/v1/news/detail/${props.match.params.postID}`)
+        
+        fetch(`/api/v1/news/detail/${data.match.params.postID}`)
             .then(response => { return response.json(); })
             .then((data) => {
                 setPost(data);
-                if (user) {
-                    setIsAuth(true);
-                }
                 if (data.author_name === user) {
                     setNewsAuthor(true);
                 };
             })
-    }, [props.match.params.postID]);
+    }, [data.match.params.postID]);
 
     const onDelete = (e) => {
         e.preventDefault();
@@ -86,7 +82,14 @@ const NewsDetailContainer = (props) => {
                     <p>Comments:</p>
                     {post.comments.map((comment) => {
                         return (
-                            <div style={{ width: 500, backgroundColor: 'lightcoral', margin: 5, padding: 15 }}>
+                            <div 
+                            style={{ 
+                                width: 500, 
+                                backgroundColor: 'lightcoral', 
+                                margin: 5, 
+                                padding: 15 }}
+                                key={comment.id}
+                                >
                                 <CommentDisplayContainer
                                     comment={comment}
                                     isNewsAuthor={isNewsAuthor}

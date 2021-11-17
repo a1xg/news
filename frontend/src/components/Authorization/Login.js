@@ -2,20 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import csrftoken from './csrftoken.js';
 
-const Login = () => {
+const Login = ({ setIsAuth, isAuth }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState(false);
-    const [loading, setLoading] = useState(true);
     const history = useHistory();
 
     useEffect(() => {
-        if (localStorage.getItem('token') === null) {
-            setLoading(false);
-        } else {
+        if (isAuth === true) {
             history.push('/')
         }
-    }, [history]);
+    }, [isAuth, history]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -37,19 +34,18 @@ const Login = () => {
                 if (data.key) {
                     localStorage.clear();
                     localStorage.setItem('token', data.key);
-                        fetch('/api/v1/auth/user/', {
-                            method: 'GET',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                Authorization: `Token ${data.key}`
-                            }
-                        })
-                            .then(res => res.json())
-                            .then(userdata => {
-                                localStorage.setItem('user', userdata.username)
-                                setLoading(false);
-                            });
-                    history.push('/');
+                    fetch('/api/v1/auth/user/', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Token ${data.key}`
+                        }
+                    })
+                        .then(res => res.json())
+                        .then(userdata => {
+                            localStorage.setItem('user', userdata.username)
+                            setIsAuth(true);
+                        });
                 } else {
                     setUsername('');
                     setPassword('');
@@ -57,14 +53,13 @@ const Login = () => {
                     setErrors(true);
                 }
             });
-
     };
 
     return (
         <div>
-            {loading === false && <h1>Login</h1>}
+            {isAuth === false && <h1>Login</h1>}
             {errors === true && <h2>Login failed</h2>}
-            {loading === false && (
+            {isAuth === false && (
                 <form onSubmit={onSubmit}>
                     <label htmlFor='username'>Username:</label> <br />
                     <input

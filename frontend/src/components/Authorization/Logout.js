@@ -1,18 +1,15 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useEffect, Fragment } from 'react';
+import { useHistory } from 'react-router-dom';
 import csrftoken from './csrftoken';
 
-const Logout = () => {
-  const [loading, setLoading] = useState(true);
+const Logout = ({ isAuth, setIsAuth }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (localStorage.getItem('token') != null) {
-      setLoading(false);
-    } else { 
+    if (isAuth === false) {
       history.push('/');
     }
-  }, [history]);
+  }, [isAuth, history]);
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -28,14 +25,13 @@ const Logout = () => {
       .then(res => res.json())
       .then(data => {
         localStorage.clear();
-        history.push('/');
-
+        setIsAuth(false);
       });
   };
 
   return (
     <div>
-      {loading === false && (
+      {isAuth && (
         <Fragment>
           <h1>Are you sure you want to logout?</h1>
           <input type='button' value='Logout' onClick={handleLogout} />

@@ -2,20 +2,16 @@ import React, { useState, useEffect, Fragment } from "react";
 import NewsPostContainer from './NewsPostContainer.jsx';
 import NewsCreateContainer from "../NewsForms/NewsCreateContainer.jsx";
 
-const NewsList = (props) => {
+const NewsList = ({ isAuth }) => {
     const [posts, setPosts] = useState([])
-    const [isAuth, setIsAuth] = useState(false);
 
     useEffect(() => {
-        if (localStorage.getItem('token') !== null) {
-            setIsAuth(true);
-        }
         fetch('/api/v1/news/list')
             .then(response => { return response.json(); })
             .then((data) => {
                 setPosts(data);
             })
-    }, [props]);
+    }, []);
 
     return (
         <div>
