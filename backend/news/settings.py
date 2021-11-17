@@ -67,7 +67,8 @@ WSGI_APPLICATION = 'news.wsgi.application'
 
 AUTH_USER_MODEL = "backend.CustomUser"
 
-
+# local database
+'''
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -79,6 +80,7 @@ DATABASES = {
     }
 }
 '''
+# database for docker image
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -88,7 +90,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-'''
 
 AUTH_PASSWORD_VALIDATORS = [
     {
