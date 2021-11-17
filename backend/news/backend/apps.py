@@ -6,5 +6,5 @@ class BackendConfig(AppConfig):
     name = "backend"
 
     def ready(self):
-        from .tasks import update
-        update.start()
+        from .tasks import executor
+        executor.start()
